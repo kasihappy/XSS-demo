@@ -17,12 +17,17 @@ switch ($reflect_xss_defense) {
 }
 
 $nonce = "";
-if ($csp_xss_defense) {
-  $nonce = generateNonce();
-  header("Content-Security-Policy: default-src 'self';
-   script-src 'self' 'nonce-$nonce'; connect-src 'self'");
+switch ($csp_xss_defense) {
+  case 1: {
+    $nonce = generateNonce();
+    header("Content-Security-Policy: default-src 'self'; script-src 'self' 'nonce-$nonce'; connect-src 'self'");
+  } break;
+  case 2: {
+    $nonce = generateNonce();
+    header("Content-Security-Policy: default-src 'self'; script-src 'self' 'nonce-$nonce'; connect-src 'self'; report-uri report");
+  } break;
+  default: break;
 }
-
 ?>
 <html>
   <head>
@@ -40,6 +45,15 @@ if ($csp_xss_defense) {
   
   </head>
   <body>
+    <div class="defense-info">
+      <p>当前防御策略，如果发现与你的设置不匹配，请刷新</p>  
+      <div class="xss">
+        反射型XSS <?= $reflect_xss_defense ?><br>
+        存储型XSS <?= $store_xss_defense ?><br>
+        CSP <?= $csp_xss_defense ?><br>
+      </div>
+    </div>
+    <br><br>
     <div class="user-info">
       <div class="user-info-role">
           role: <?php echo $_SESSION['role'];?>

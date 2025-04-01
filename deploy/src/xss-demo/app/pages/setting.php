@@ -62,6 +62,7 @@ else { ?>
         <select name="csp" id="parameter">
             <option value="0">关闭（默认）</option>
             <option value="1">启动</option>
+            <option value="2">启动+报告</option>
         </select>
         <button type="submit">提交</button>
     </form>

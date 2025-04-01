@@ -16,6 +16,7 @@
     case "add":     include "app/pages/addpost.php";break;
     case "clear":   include "app/api/clear.php";    break;
     case "setting": include "app/pages/setting.php";break;
-    case "config":  include "app/pages/config.php"; break;
+    case "report":  include "app/pages/report.php"; break;
+    case "logs":    include "app/pages/csp-reports.log"; break;
     default:        include "app/pages/404.php";    break;
   }
